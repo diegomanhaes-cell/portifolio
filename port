@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio de Designer</title>
+    <!-- Incluindo Tailwind CSS para estilização rápida -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Importa a fonte Montserrat do Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #0d0d0d;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Estilo para o efeito de glassmorphism */
+        .glassmorphism {
+            background-color: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        /* Estilos de scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Estilo para a imagem do modal crescer no hover */
+        #modal-images img {
+            transition: transform 0.3s ease-in-out;
+        }
+        #modal-images img:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Estilos para o carrossel de 3 itens, com destaque no item do centro */
+        .carousel-item {
+            width: calc(100% / 3 - 1rem); /* 3 itens com 1rem de gap */
+            flex-shrink: 0;
+            transition: all 0.5s ease-in-out;
+            transform: scale(0.9); /* Escala padrão para itens inativos */
+            opacity: 0.8;
+            filter: blur(5px) brightness(0.5);
+        }
+        .carousel-item.active {
+            filter: none;
+            opacity: 1;
+            transform: scale(1.1); /* Destaque no item central */
+        }
+
+        /* Estilo para os botões com efeito de brilho e vidro */
+        .btn-glass-glow {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease-in-out;
+            color: #F97316; /* Cor do texto laranja do Tailwind */
+        }
+        .btn-glass-glow:hover, .btn-glass-glow:focus {
+            box-shadow: 0 0 25px rgba(255, 165, 0, 0.5); /* Efeito de brilho laranja */
+            transform: scale(1.05);
+            color: #fff; /* Cor do texto branco no hover */
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white selection:bg-orange-500 selection:text-black">
+    <!-- Cabeçalho Fixo (Navbar) -->
+    <header class="fixed w-full z-50 glassmorphism rounded-b-xl px-4 py-3 md:px-8">
+        <nav class="container mx-auto flex items-center justify-between">
+            <a href="#home" class="text-xl font-bold text-orange-500" aria-label="Voltar para o início">Diego Manhães</a>
+            <div class="hidden md:flex space-x-6 lg:space-x-12">
+                <a href="#home" class="hover:text-orange-500 transition-colors">Início</a>
+                <a href="#portfolio" class="hover:text-orange-500 transition-colors">Portfólio</a>
+                <a href="#carrossel-projetos" class="hover:text-orange-500 transition-colors">Destaques</a>
+                <a href="#orcamento" class="hover:text-orange-500 transition-colors">Orçamento</a>
+            </div>
+            <!-- Menu mobile - Simples para este exemplo -->
+        </nav>
+    </header>
+
+    <main class="relative z-10">
+        <!-- Seção de Início (Home) -->
+        <section id="home" class="flex items-center justify-center p-4 md:p-8 pt-36 pb-12 md:pt-48 md:pb-16">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold mb-4 animate-pulse">
+                    Olá, eu sou <span class="text-orange-500">Diego Manhães</span>.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Designer gráfico especializado em branding e identidade visual.
+                </p>
+                <!-- Links de redes sociais (o ícone do WhatsApp foi removido) -->
+                <div class="flex justify-center space-x-6">
+                    <a href="https://www.behance.net/godiegoribeiro" target="_blank" aria-label="Visite meu perfil no Behance" class="hover:text-orange-500 transition-colors">
+                        <img src="https://i.imgur.com/q8wy0zP.png" alt="Ícone do Behance" class="w-8 h-8 filter grayscale brightness-200">
+                    </a>
+                    <a href="https://www.instagram.com/odiego.manhaes/" target="_blank" aria-label="Visite meu perfil no Instagram" class="hover:text-orange-500 transition-colors">
+                        <img src="https://i.imgur.com/Q4XHD2W.png" alt="Ícone do Instagram" class="w-8 h-8 filter grayscale brightness-200">
+                    </a>
+                </div>
+                <!-- NOVO: Botão de CTA para o WhatsApp, com novo estilo -->
+                <a href="https://wa.me/5562995744670" target="_blank" class="mt-8 inline-block px-6 py-3 rounded-xl transition-all duration-300 font-bold glassmorphism border border-white/20 text-orange-500 hover:text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,165,0,0.5)] hover:scale-105">
+                    Fale comigo no WhatsApp
+                </a>
+            </div>
+        </section>
+
+        <!-- Seção de Portfólio (Artes) -->
+        <section id="portfolio" class="container mx-auto py-16 px-4 md:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Meus Projetos</h2>
+            <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Os projetos serão inseridos aqui dinamicamente pelo JavaScript -->
+            </div>
+            <!-- NOVO CTA na seção Portfólio para o WhatsApp -->
+            <p class="text-center text-lg text-gray-300 mt-12">
+                Gostou do meu trabalho? <a href="https://wa.me/5562995744670" target="_blank" class="text-orange-500 font-bold hover:underline">Fale comigo no WhatsApp!</a>
+            </p>
+        </section>
+
+        <!-- Seção de Carrossel de Projetos (nova seção) -->
+        <section id="carrossel-projetos" class="container mx-auto py-16 px-4 md:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Destaques</h2>
+            <div class="relative flex items-center justify-center">
+                <button id="prev-btn" class="absolute left-0 z-20 text-white hover:text-orange-500 transition-colors focus:outline-none" aria-label="Projeto anterior">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                </button>
+                <div id="carousel-container" class="flex items-center justify-center space-x-8 overflow-hidden w-full">
+                    <!-- O carrossel será preenchido aqui pelo JavaScript -->
+                </div>
+                <button id="next-btn" class="absolute right-0 z-20 text-white hover:text-orange-500 transition-colors focus:outline-none" aria-label="Próximo projeto">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                </button>
+            </div>
+        </section>
+
+        <!-- Seção de Orçamento (Contato) -->
+        <section id="orcamento" class="container mx-auto py-16 px-4 md:px-8">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-bold mb-4">Faça seu Orçamento</h2>
+                <p class="text-gray-300 mb-8">
+                    Descreva seu projeto e entrarei em contato para conversarmos sobre a melhor solução.
+                </p>
+                <!-- Formulário de contato, agora com um botão de envio padrão -->
+                <form id="orcamento-form" class="glassmorphism rounded-3xl p-8 space-y-6">
+                    <div>
+                        <input type="text" id="nome" name="nome" placeholder="Seu Nome" required class="w-full px-4 py-3 bg-white/5 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <input type="email" id="email" name="email" placeholder="Seu Email" required class="w-full px-4 py-3 bg-white/5 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <input type="tel" id="telefone" name="telefone" placeholder="Seu Telefone (ex: 99 99999-9999)" required class="w-full px-4 py-3 bg-white/5 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                    </div>
+                    <div>
+                        <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva seu projeto..." required class="w-full px-4 py-3 bg-white/5 rounded-xl border border-white/20 focus:outline-none focus:ring-2 focus:ring-orange-500"></textarea>
+                    </div>
+                    <!-- Botão de formulário com novo estilo de brilho -->
+                    <button type="submit" class="w-full py-3 rounded-xl btn-glass-glow font-bold glassmorphism border border-white/20 text-orange-500 hover:text-white hover:bg-white/10 hover:shadow-[0_0_20px_rgba(255,165,0,0.5)] hover:scale-105">
+                        Enviar Orçamento
+                    </button>
+                    <div id="status-mensagem" class="mt-4 text-center hidden">
+                        <!-- Mensagem de status será exibida aqui -->
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal para exibição dos projetos -->
+    <div id="project-modal" class="fixed inset-0 bg-gray-950/90 flex items-center justify-center p-4 md:p-8 z-[100] hidden">
+        <div class="glassmorphism rounded-3xl p-6 md:p-10 max-w-5xl w-full relative">
+            <button id="close-modal" class="absolute top-4 right-4 text-white hover:text-orange-500 transition-colors" aria-label="Fechar modal">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div id="modal-content">
+                <h3 id="modal-title" class="text-3xl font-bold text-orange-500 mb-4"></h3>
+                <p id="modal-description" class="text-gray-300 mb-8"></p>
+                <div id="modal-images" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <!-- Imagens do projeto serão injetadas aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script principal com toda a lógica da página -->
+    <script type="module">
+        // Importa as bibliotecas do Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithCustomToken, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variáveis globais fornecidas pelo ambiente Canvas
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let userId = null;
+        let app, auth, db;
+        
+        // Função para autenticar o usuário no Firebase (com token customizado ou anonimamente)
+        const authenticate = async () => {
+            try {
+                if (initialAuthToken) {
+                    const userCredential = await signInWithCustomToken(auth, initialAuthToken);
+                    userId = userCredential.user.uid;
+                } else {
+                    const userCredential = await signInAnonymously(auth);
+                    userId = userCredential.user.uid;
+                }
+                console.log("Usuário autenticado com sucesso. UID:", userId);
+            } catch (error) {
+                console.error("Erro de autenticação do Firebase:", error);
+            }
+        };
+
+        // Função para lidar com a submissão do formulário de orçamento
+        const handleFormSubmit = async (event) => {
+            event.preventDefault();
+            
+            // Garante que o usuário está autenticado antes de enviar dados ao Firestore
+            if (!userId) {
+                await authenticate();
+            }
+            
+            const form = event.target;
+            const statusMsg = document.getElementById('status-mensagem');
+            const submitButton = form.querySelector('button[type="submit"]');
+
+            const formData = {
+                nome: form.nome.value,
+                email: form.email.value,
+                telefone: form.telefone.value,
+                mensagem: form.mensagem.value,
+                timestamp: new Date().toISOString()
+            };
+
+            submitButton.disabled = true;
+            submitButton.textContent = "Enviando...";
+            statusMsg.classList.add('hidden');
+
+            try {
+                // Caminho para a coleção de leads no Firestore (dados privados do usuário)
+                const leadsCollectionRef = collection(db, `artifacts/${appId}/users/${userId}/leads`);
+                await addDoc(leadsCollectionRef, formData);
+                
+                statusMsg.textContent = "Mensagem enviada com sucesso! Em breve entraremos em contato.";
+                statusMsg.classList.remove('hidden', 'text-red-500');
+                statusMsg.classList.add('text-green-400');
+                form.reset();
+            } catch (error) {
+                console.error("Erro ao salvar lead no Firestore:", error);
+                statusMsg.textContent = "Erro ao enviar mensagem. Tente novamente.";
+                statusMsg.classList.remove('hidden', 'text-green-400');
+                statusMsg.classList.add('text-red-500');
+            } finally {
+                submitButton.disabled = false;
+                submitButton.textContent = "Enviar Orçamento";
+            }
+        };
+
+        // Lógica para navegação suave entre as seções da página
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href === '#') {
+                    e.preventDefault();
+                    return;
+                }
+                e.preventDefault();
+                document.querySelector(href).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // --- Lógica para o Portfólio e Modal ---
+        const projects = [
+            {
+                id: 'projeto-autoestima',
+                coverImage: 'https://i.imgur.com/Zy6GNdw.png',
+                images: [
+                    'https://i.imgur.com/Zy6GNdw.png',
+                    'https://i.imgur.com/5sMVGuZ.png',
+                    'https://i.imgur.com/hdSpxg1.png'
+                ],
+                title: 'Autoestima Elevada',
+                description: 'Criação de criativos para mídias sociais de uma clínica de estética, com foco em aumentar o engajamento e a percepção de valor da marca.'
+            },
+            {
+                id: 'projeto-novo-branding',
+                coverImage: 'https://i.imgur.com/E6X8RTb.png',
+                images: [
+                    'https://i.imgur.com/E6X8RTb.png',
+                    'https://i.imgur.com/L0vnQeC.png',
+                    'https://i.imgur.com/bN2TQGA.png'
+                ],
+                title: 'Identidade Visual de Marca',
+                description: 'Desenvolvimento de identidade visual e materiais para mídias sociais, com o objetivo de construir uma presença de marca forte e coerente.'
+            },
+            {
+                id: 'projeto-identidade-visual',
+                coverImage: 'https://i.imgur.com/KhFTgv3.png',
+                images: [
+                    'https://i.imgur.com/KhFTgv3.png'
+                ],
+                title: 'Identidade Visual',
+                description: 'Este é um projeto de identidade visual completo, mostrando o design de marca e suas aplicações.'
+            },
+            {
+                id: 'projeto-novo-portfolio-item',
+                coverImage: 'https://i.imgur.com/zgq6IZN.png',
+                images: [
+                    'https://i.imgur.com/zgq6IZN.png'
+                ],
+                title: 'Novo Projeto de Portfólio',
+                description: 'Esta é uma nova peça de design de identidade visual. Uma imagem de capa, mas de design mais complexo.'
+            },
+            {
+                id: 'projeto-novo-branding-2',
+                coverImage: 'https://i.imgur.com/OBKax9w.png',
+                images: [
+                    'https://i.imgur.com/OBKax9w.png',
+                    'https://i.imgur.com/e0Iyn2N.png',
+                    'https://i.imgur.com/hcwUS2c.png',
+                    'https://i.imgur.com/WNyLIfV.png'
+                ],
+                title: 'Criação de Logotipo',
+                description: 'Projeto de design de logotipo e identidade visual, incluindo várias aplicações.'
+            },
+            {
+                id: 'projeto-novo-trabalho',
+                coverImage: 'https://i.imgur.com/VRGtcqt.png',
+                images: [
+                    'https://i.imgur.com/VRGtcqt.png',
+                    'https://i.imgur.com/VIi8ff6.png',
+                    'https://i.imgur.com/f6PgVOX.png',
+                    'https://i.imgur.com/VwGNB3J.png'
+                ],
+                title: 'Design para Mídias Sociais',
+                description: 'Conjunto de posts e artes para mídias sociais, focado em promover um serviço ou produto de forma visualmente atraente.'
+            },
+        ];
+
+        let projectGrid, carouselContainer, projectModal, closeModalButton, modalTitle, modalDescription, modalImages;
+        let currentCarouselIndex = 0;
+
+        // Função para abrir o modal com os detalhes de um projeto
+        function openProjectModal(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (!project) return;
+
+            modalTitle.textContent = project.title;
+            modalDescription.textContent = project.description;
+            modalImages.innerHTML = '';
+            
+            project.images.forEach(imageUrl => {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageUrl;
+                // Adiciona um placeholder caso a imagem falhe ao carregar
+                imgElement.onerror = "this.src='https://placehold.co/400x300/262626/808080?text=Imagem+indisponível'";
+                imgElement.alt = `Imagem do projeto ${project.title}`;
+                imgElement.classList.add('w-full', 'h-auto', 'object-cover', 'rounded-2xl', 'glassmorphism');
+                modalImages.appendChild(imgElement);
+            });
+
+            projectModal.classList.remove('hidden');
+        }
+
+        // Função para renderizar os projetos na seção de Portfólio (grid)
+        function renderProjects() {
+            if (!projectGrid) return;
+            projectGrid.innerHTML = '';
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.classList.add('relative', 'group', 'glassmorphism', 'rounded-3xl', 'overflow-hidden', 'cursor-pointer', 'aspect-square');
+                projectCard.setAttribute('data-project-id', project.id);
+                
+                projectCard.innerHTML = `
+                    <img src="${project.coverImage}" alt="Capa do projeto ${project.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gray-950/70 glassmorphism opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-4">
+                        <h3 class="text-xl font-semibold text-orange-500">${project.title}</h3>
+                        <p class="text-gray-200 mt-2">Clique para ver mais...</p>
+                    </div>
+                `;
+                projectGrid.appendChild(projectCard);
+            });
+        }
+        
+        // Função para renderizar o carrossel de 3 projetos, com o do meio em destaque
+        function renderCarousel() {
+            if (!carouselContainer) return;
+            carouselContainer.innerHTML = '';
+            const numProjects = projects.length;
+            
+            const indicesToShow = [
+                (currentCarouselIndex - 1 + numProjects) % numProjects,
+                currentCarouselIndex,
+                (currentCarouselIndex + 1) % numProjects
+            ];
+
+            indicesToShow.forEach((index, i) => {
+                const project = projects[index];
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('carousel-item', 'relative', 'group', 'overflow-hidden', 'cursor-pointer', 'aspect-square', 'rounded-3xl');
+                
+                if (i === 1) {
+                    itemDiv.classList.add('active'); // Aplica o estilo de destaque para o item central
+                } else {
+                    itemDiv.classList.add('inactive'); // Aplica o estilo para os itens inativos
+                }
+
+                itemDiv.setAttribute('data-project-id', project.id);
+
+                itemDiv.innerHTML = `
+                    <img src="${project.coverImage}" alt="Capa do projeto ${project.title}" class="w-full h-full object-cover rounded-3xl transition-all duration-500">
+                    <div class="absolute inset-0 bg-gray-950/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center text-center p-4">
+                        <h3 class="text-xl font-semibold text-orange-500">${project.title}</h3>
+                        <p class="text-gray-200 mt-2">Clique para ver mais...</p>
+                    </div>
+                `;
+                carouselContainer.appendChild(itemDiv);
+            });
+        }
+
+        // Move o carrossel para o próximo item
+        function nextCarousel() {
+            currentCarouselIndex = (currentCarouselIndex + 1) % projects.length;
+            renderCarousel();
+        }
+
+        // Move o carrossel para o item anterior
+        function prevCarousel() {
+            currentCarouselIndex = (currentCarouselIndex - 1 + projects.length) % projects.length;
+            renderCarousel();
+        }
+
+        // Event listener para abrir o modal a partir do grid
+        document.addEventListener('click', function(e) {
+            const projectCard = e.target.closest('#project-grid [data-project-id]');
+            if (projectCard) {
+                const projectId = projectCard.getAttribute('data-project-id');
+                openProjectModal(projectId);
+            }
+        });
+        
+        // Event listener para abrir o modal a partir do carrossel
+        document.addEventListener('click', function(e) {
+            const carouselItem = e.target.closest('#carousel-container [data-project-id]');
+            if (carouselItem) {
+                const projectId = carouselItem.getAttribute('data-project-id');
+                openProjectModal(projectId);
+            }
+        });
+
+        // Event listener para fechar o modal
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('#close-modal') || e.target.id === 'project-modal') {
+                projectModal.classList.add('hidden');
+            }
+        });
+
+        // Inicialização da página quando o DOM estiver completamente carregado
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Inicializa o Firebase
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            
+            // Autentica o usuário e obtém o ID
+            await authenticate();
+            
+            // Adiciona o event listener ao formulário de orçamento
+            const orcamentoForm = document.getElementById('orcamento-form');
+            if (orcamentoForm) {
+                orcamentoForm.addEventListener('submit', handleFormSubmit);
+            }
+            
+            // Pega as referências dos elementos DOM
+            projectGrid = document.getElementById('project-grid');
+            carouselContainer = document.getElementById('carousel-container');
+            projectModal = document.getElementById('project-modal');
+            closeModalButton = document.getElementById('close-modal');
+            modalTitle = document.getElementById('modal-title');
+            modalDescription = document.getElementById('modal-description');
+            modalImages = document.getElementById('modal-images');
+            
+            // Renderiza o grid de projetos e o carrossel na inicialização
+            renderProjects();
+            renderCarousel();
+            
+            // Adiciona event listeners para os botões do carrossel
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            if (prevBtn) prevBtn.addEventListener('click', prevCarousel);
+            if (nextBtn) nextBtn.addEventListener('click', nextCarousel);
+        });
+    </script>
+</body>
+</html>
